@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default ({ className, onSubmit, display }) => {
+export default ({ onClick, value }) => {
   return (
-    <button className={className} onSubmit={onSubmit}>{display}</button>
+    <button onClick={onClick}>{value}</button>
   );
 };

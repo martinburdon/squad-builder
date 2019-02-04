@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default ({ onChange, value }) => {
+export default ({ value, onChange }) => {
   return (
-    <input onChange={onChange}>{value}</input>
+    <input type="text" value={value} onChange={(e) => onChange(e.target.value)} />
   );
 };

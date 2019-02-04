@@ -1,9 +1,28 @@
 import React, { Component } from 'react';
+import Select from './components/Select.jsx';
+import Input from './components/Input.jsx';
+import Button from './components/Button.jsx';
+import Pitch from './components/Pitch.jsx';
+
+// TODO: Pull from config or some external source
+const availableFormations = [
+  {
+    display: '4-4-2',
+    value: '442'
+  },
+  {
+    display: '4-2-3-1',
+    value: '4231'
+  }
+];
 
 class App extends Component {
   state = {
     squadInfo: {
-      formation: '4231',
+      formation: {
+        display: '4-2-3-1',
+        value: '4231'
+      },
       name: 'Sunderland',
       numberOfPlayers: 11
     },
@@ -14,90 +33,125 @@ class App extends Component {
       colourText: 'black'
     },
     pitchStyle: '',
-    positions: [
+    players: [
       {
+        arrow: false,
+        captain: true,
+        name: 'McGloughan',
         positionId: 1,
-        name: '',
-        shirtNumber: 1,
-        arrow: false,
-        captain: false
+        shirtNumber: 1
       },
       {
+        arrow: false,
+        captain: false,
+        name: '',
         positionId: 2,
-        name: '',
-        shirtNumber: 2,
-        arrow: false,
-        captain: false
+        shirtNumber: 2
       },
       {
+        arrow: false,
+        captain: false,
+        name: '',
         positionId: 3,
-        name: '',
-        shirtNumber: 3,
-        arrow: false,
-        captain: false
+        shirtNumber: 3
       },
       {
+        arrow: false,
+        captain: false,
+        name: '',
         positionId: 4,
-        name: '',
-        shirtNumber: 4,
-        arrow: false,
-        captain: false
+        shirtNumber: 4
       },
       {
+        arrow: false,
+        captain: false,
+        name: '',
         positionId: 5,
-        name: '',
-        shirtNumber: 5,
-        arrow: false,
-        captain: false
+        shirtNumber: 5
       },
       {
+        arrow: false,
+        captain: false,
+        name: '',
         positionId: 6,
-        name: '',
-        shirtNumber: 6,
-        arrow: false,
-        captain: false
+        shirtNumber: 6
       },
       {
+        arrow: false,
+        captain: false,
+        name: '',
         positionId: 7,
-        name: '',
-        shirtNumber: 7,
-        arrow: false,
-        captain: false
+        shirtNumber: 7
       },
       {
+        arrow: false,
+        captain: false,
+        name: '',
         positionId: 8,
-        name: '',
-        shirtNumber: 8,
-        arrow: false,
-        captain: false
+        shirtNumber: 8
       },
       {
+        arrow: false,
+        captain: false,
+        name: '',
         positionId: 9,
-        name: '',
-        shirtNumber: 9,
-        arrow: false,
-        captain: false
+        shirtNumber: 9
       },
       {
+        arrow: false,
+        captain: false,
+        name: '',
         positionId: 10,
-        name: '',
-        shirtNumber: 10,
-        arrow: false,
-        captain: false
+        shirtNumber: 10
       },
       {
-        positionId: 11,
-        name: '',
-        shirtNumber: 11,
         arrow: false,
-        captain: false
+        captain: false,
+        name: '',
+        positionId: 11,
+        shirtNumber: 11
       }
     ]
   };
 
+  formationOnChange = formation => {
+    const squadInfo = { ...this.state.squadInfo };
+    squadInfo.formation = formation;
+    this.setState({ squadInfo });
+  };
+
+  nameOnChange = name => {
+    const squadInfo = { ...this.state.squadInfo };
+    squadInfo.name = name;
+    this.setState({ squadInfo });
+  };
+
+  customiseOnClick = () => {
+    // TODO: Open modal with customise options
+    console.log('Customise clicked');
+  };
+
   render() {
     return (
-      <div className="app"></div>
+      <div className="app">
+        <Select
+          data={availableFormations}
+          selected={this.state.squadInfo.formation}
+          onChange={this.formationOnChange}
+        />
+        <Input
+          value={this.state.squadInfo.name}
+          onChange={this.nameOnChange}
+        />
+        <Button
+          value="Customise"
+          onClick={this.customiseOnClick}
+        />
+        <Pitch
+          formation={this.state.squadInfo.formation}
+          players={this.state.players}
+        />
+      </div>
     );
   }
 }

@@ -1,21 +1,15 @@
 import React from 'react';
 
-// Example data
-// const data = [
-//   {
-//     display: '4-4-2',
-//     value: '442'
-//   },
-//   {
-//     display: '4-2-3-1',
-//     value: '4231'
-//   }
-// ];
+const handleChange = (e, data, onChange) => {
+  const selectedValue = e.target.value;
+  const selectedFormation = data.find(item => item.value === selectedValue);
+  onChange(selectedFormation);
+};
 
-export default ({ data, onChange, value }) => {
+export default ({ data, onChange, selected }) => {
   const options = data.map((item, x) => <option value={item.value} key={x}>{item.display}</option>);
   return (
-    <select value={value} onChange={onChange}>
+    <select value={selected.value} onChange={(e) => handleChange(e, data, onChange)}>
       {options}
     </select>
   );
