@@ -1,26 +1,103 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 class App extends Component {
+  state = {
+    squadInfo: {
+      formation: '4231',
+      name: 'Sunderland',
+      numberOfPlayers: 11
+    },
+    shirtStyle: {
+      style: 'fmclassic',
+      colourPrimary: 'red',
+      colourSecondary: 'white',
+      colourText: 'black'
+    },
+    pitchStyle: '',
+    positions: [
+      {
+        positionId: 1,
+        name: '',
+        shirtNumber: 1,
+        arrow: false,
+        captain: false
+      },
+      {
+        positionId: 2,
+        name: '',
+        shirtNumber: 2,
+        arrow: false,
+        captain: false
+      },
+      {
+        positionId: 3,
+        name: '',
+        shirtNumber: 3,
+        arrow: false,
+        captain: false
+      },
+      {
+        positionId: 4,
+        name: '',
+        shirtNumber: 4,
+        arrow: false,
+        captain: false
+      },
+      {
+        positionId: 5,
+        name: '',
+        shirtNumber: 5,
+        arrow: false,
+        captain: false
+      },
+      {
+        positionId: 6,
+        name: '',
+        shirtNumber: 6,
+        arrow: false,
+        captain: false
+      },
+      {
+        positionId: 7,
+        name: '',
+        shirtNumber: 7,
+        arrow: false,
+        captain: false
+      },
+      {
+        positionId: 8,
+        name: '',
+        shirtNumber: 8,
+        arrow: false,
+        captain: false
+      },
+      {
+        positionId: 9,
+        name: '',
+        shirtNumber: 9,
+        arrow: false,
+        captain: false
+      },
+      {
+        positionId: 10,
+        name: '',
+        shirtNumber: 10,
+        arrow: false,
+        captain: false
+      },
+      {
+        positionId: 11,
+        name: '',
+        shirtNumber: 11,
+        arrow: false,
+        captain: false
+      }
+    ]
+  };
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <div className="app"></div>
     );
   }
 }
