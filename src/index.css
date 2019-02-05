@@ -12,21 +12,3 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.6rem;
 }
-
-/* TODO: Aspect ratio */
-.pitch {
-  background: mediumseagreen;
-  height: 50rem;
-  position: relative;
-  width: 40rem;
-}
-
-/* .player {
-  align-items: center;
-  background: teal;
-  display: flex;
-  flex-direction: column;
-  height: 5rem;
-  position: absolute;
-  width: 5rem;
-} */
