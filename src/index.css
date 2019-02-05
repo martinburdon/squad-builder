@@ -21,6 +21,12 @@ body {
   width: 40rem;
 }
 
-.player {
+/* .player {
+  align-items: center;
+  background: teal;
+  display: flex;
+  flex-direction: column;
+  height: 5rem;
   position: absolute;
-}
+  width: 5rem;
+} */
