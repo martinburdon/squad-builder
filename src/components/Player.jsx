@@ -1,4 +1,5 @@
 import React from 'react';
+import Input from './Input.jsx';
 import styled from 'styled-components';
 
 const Player = styled.div`
@@ -18,7 +19,8 @@ export default ({
   name,
   positionId,
   shirtNumber,
-  positions
+  positions,
+  playerNameOnChange
 }) => {
   const { x, y } = positions;
   return (
@@ -26,6 +28,10 @@ export default ({
       {captain ? <i>C</i> : null}
       <span>{shirtNumber}</span>
       <span>{name}</span>
+      <Input
+        value={name}
+        onChange={playerNameOnChange}
+      />
     </Player>
   )
 };

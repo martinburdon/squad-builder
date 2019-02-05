@@ -3,6 +3,9 @@ import Select from './components/Select.jsx';
 import Input from './components/Input.jsx';
 import Button from './components/Button.jsx';
 import Pitch from './components/Pitch.jsx';
+import PlayerOptionsContainer from './components/PlayerOptionsContainer.jsx';
+import ShirtOptionsContainer from './components/ShirtOptionsContainer.jsx';
+import Modal from 'react-modal';
 
 // TODO: Pull from config or some external source
 const availableFormations = [
@@ -44,6 +47,8 @@ const availableFormations = [
 
 class App extends Component {
   state = {
+    modalComponent: false,
+    modalIsOpen: false,
     squadInfo: {
       formation: {
         display: '4-4-2',
@@ -155,6 +160,17 @@ class App extends Component {
     this.updatePlayerPositions();
   }
 
+  openModal = () => {
+    this.setState({ modalIsOpen: true });
+  };
+
+  closeModal = () => {
+    this.setState({
+      modalComponent: false,
+      modalIsOpen: false
+    });
+  };
+
   updatePlayerPositions() {
     // Get the positions for the current formation
     let currentPositions = availableFormations.find(item => item.value === this.state.squadInfo.formation.value).positions;
@@ -182,12 +198,27 @@ class App extends Component {
     this.setState({ squadInfo });
   };
 
-  customiseOnClick = () => {
-    // TODO: Open modal with customise options
-    console.log('Customise clicked');
+  openShirtOptions = () => {
+    this.setState({ modalComponent: 'shirtOptions' }, () => {
+      this.openModal();
+    });
+  };
+
+  openPlayerOptions = () => {
+    this.setState({ modalComponent: 'playerOptions' }, () => {
+      this.openModal();
+    });
+  };
+
+  playerNameOnChange = (name, id) => {
+    console.log(':: hi');
   };
 
   render() {
+    let modalComponent = false;
+    if (this.state.modalComponent === 'shirtOptions') modalComponent = <ShirtOptionsContainer />;
+    if (this.state.modalComponent === 'playerOptions') modalComponent = <PlayerOptionsContainer />;
+
     return (
       <div className="app">
         <Select
@@ -200,13 +231,31 @@ class App extends Component {
           onChange={this.nameOnChange}
         />
         <Button
-          value="Customise"
-          onClick={this.customiseOnClick}
+          value="Shirt Options"
+          onClick={this.openShirtOptions}
         />
         <Pitch
           formation={this.state.squadInfo.formation}
           players={this.state.players}
+          playerNameOnChange={this.playerNameOnChange}
         />
+
+        <Button
+          value="Player Options"
+          onClick={this.openPlayerOptions}
+        />
+
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}
+        >
+          <Button
+            value="Close"
+            onClick={this.closeModal}
+          />
+            {modalComponent}
+        </Modal>
+
       </div>
     );
   }
