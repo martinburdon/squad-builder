@@ -1,5 +1,4 @@
 import React from 'react';
-import Input from './Input.jsx';
 import styled from 'styled-components';
 
 const Player = styled.div`
@@ -17,6 +16,7 @@ export default ({
   arrow,
   captain,
   name,
+  onPlayerClick,
   positionId,
   shirtNumber,
   positions,
@@ -24,18 +24,10 @@ export default ({
 }) => {
   const { x, y } = positions;
   return (
-    <Player x={x} y={y}>
+    <Player x={x} y={y} onClick={() => onPlayerClick(positionId)}>
       {captain ? <i>C</i> : null}
       <span>{shirtNumber}</span>
       <span>{name}</span>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => playerNameOnChange({
-          value: e.target.value,
-          positionId
-        })}
-      />
     </Player>
   )
 };

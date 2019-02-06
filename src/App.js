@@ -49,6 +49,7 @@ class App extends Component {
   state = {
     modalComponent: false,
     modalIsOpen: false,
+    editingPositionId: false,
     squadInfo: {
       formation: {
         display: '4-4-2',
@@ -204,8 +205,11 @@ class App extends Component {
     });
   };
 
-  openPlayerOptions = () => {
-    this.setState({ modalComponent: 'playerOptions' }, () => {
+  openPlayerOptions = (playerId) => {
+    this.setState({
+      modalComponent: 'playerOptions',
+      editingPositionId: playerId
+    }, () => {
       this.openModal();
     });
   };
@@ -225,8 +229,17 @@ class App extends Component {
 
   render() {
     let modalComponent = false;
-    if (this.state.modalComponent === 'shirtOptions') modalComponent = <ShirtOptionsContainer />;
-    if (this.state.modalComponent === 'playerOptions') modalComponent = <PlayerOptionsContainer />;
+    if (this.state.modalComponent === 'shirtOptions') {
+      modalComponent = <ShirtOptionsContainer />;
+    }
+
+    if (this.state.modalComponent === 'playerOptions') {
+      modalComponent = <PlayerOptionsContainer
+        players={this.state.players}
+        editingPositionId={this.state.editingPositionId}
+        playerNameOnChange={this.playerNameOnChange}
+      />;
+    }
 
     return (
       <div className="app">
@@ -245,6 +258,7 @@ class App extends Component {
         />
         <Pitch
           formation={this.state.squadInfo.formation}
+          onPlayerClick={this.openPlayerOptions}
           players={this.state.players}
           playerNameOnChange={this.playerNameOnChange}
         />

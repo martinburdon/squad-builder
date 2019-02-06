@@ -9,8 +9,8 @@ const Pitch = styled.div`
   width: 40rem;
 `;
 
-export default ({ formation, players, playerNameOnChange }) => {
-  const data = players.map((player, x) => <PlayerContainer {...player} key={x} playerNameOnChange={playerNameOnChange} />);
+export default ({ formation, onPlayerClick, players, playerNameOnChange }) => {
+  const data = players.map((player, x) => <PlayerContainer {...player} key={x} playerNameOnChange={playerNameOnChange} onPlayerClick={onPlayerClick} />);
   return (
     <Pitch>
       {data}
