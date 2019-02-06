@@ -256,23 +256,10 @@ class App extends Component {
           players={this.state.players}
           playerNameOnChange={this.playerNameOnChange}
         />
-
-        <Button
-          value="Player Options"
-          onClick={this.openPlayerOptions}
-        />
-
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onRequestClose={this.closeModal}
-        >
-          <Button
-            value="Close"
-            onClick={this.closeModal}
-          />
-            {modalComponent}
+        <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
+          <Button value="Close" onClick={this.closeModal} />
+          {modalComponent}
         </Modal>
-
       </div>
     );
   }
