@@ -16,13 +16,15 @@ export default ({
   arrow,
   captain,
   name,
+  onPlayerClick,
   positionId,
   shirtNumber,
-  positions
+  positions,
+  playerNameOnChange
 }) => {
   const { x, y } = positions;
   return (
-    <Player x={x} y={y}>
+    <Player x={x} y={y} onClick={() => onPlayerClick(positionId)}>
       {captain ? <i>C</i> : null}
       <span>{shirtNumber}</span>
       <span>{name}</span>

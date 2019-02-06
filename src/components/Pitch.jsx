@@ -1,5 +1,5 @@
 import React from 'react';
-import Player from './Player.jsx';
+import PlayerContainer from './PlayerContainer.jsx';
 import styled from 'styled-components';
 
 const Pitch = styled.div`
@@ -9,8 +9,8 @@ const Pitch = styled.div`
   width: 40rem;
 `;
 
-export default ({ formation, players }) => {
-  const data = players.map((player, x) => <Player {...player} key={x} />);
+export default ({ formation, onPlayerClick, players, playerNameOnChange }) => {
+  const data = players.map((player, x) => <PlayerContainer {...player} key={x} playerNameOnChange={playerNameOnChange} onPlayerClick={onPlayerClick} />);
   return (
     <Pitch>
       {data}

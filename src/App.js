@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Select from './components/Select.jsx';
-import Input from './components/Input.jsx';
-import Button from './components/Button.jsx';
 import Pitch from './components/Pitch.jsx';
+import ModalManager from './components/ModalManager.jsx';
+import SquadSettingsContainer from './components/SquadSettingsContainer.jsx';
 
 // TODO: Pull from config or some external source
 const availableFormations = [
@@ -44,6 +43,9 @@ const availableFormations = [
 
 class App extends Component {
   state = {
+    modalComponent: false,
+    modalIsOpen: false,
+    editingPositionId: false,
     squadInfo: {
       formation: {
         display: '4-4-2',
@@ -155,6 +157,17 @@ class App extends Component {
     this.updatePlayerPositions();
   }
 
+  openModal = () => {
+    this.setState({ modalIsOpen: true });
+  };
+
+  closeModal = () => {
+    this.setState({
+      modalComponent: false,
+      modalIsOpen: false
+    });
+  };
+
   updatePlayerPositions() {
     // Get the positions for the current formation
     let currentPositions = availableFormations.find(item => item.value === this.state.squadInfo.formation.value).positions;
@@ -182,30 +195,58 @@ class App extends Component {
     this.setState({ squadInfo });
   };
 
-  customiseOnClick = () => {
-    // TODO: Open modal with customise options
-    console.log('Customise clicked');
+  openShirtOptions = () => {
+    this.setState({ modalComponent: 'shirtOptions' }, () => {
+      this.openModal();
+    });
+  };
+
+  openPlayerOptions = (playerId) => {
+    this.setState({
+      modalComponent: 'playerOptions',
+      editingPositionId: playerId
+    }, () => {
+      this.openModal();
+    });
+  };
+
+  playerNameOnChange = ({ value, positionId }) => {
+    const state = this.state.players;
+    const newState = state.map(player => {
+      let name = player.name;
+      if (player.positionId === positionId) name = value;
+      return {
+        ...player,
+        name
+      }
+    });
+    this.setState({ players: newState });
   };
 
   render() {
     return (
       <div className="app">
-        <Select
-          data={availableFormations}
-          selected={this.state.squadInfo.formation}
-          onChange={this.formationOnChange}
-        />
-        <Input
-          value={this.state.squadInfo.name}
-          onChange={this.nameOnChange}
-        />
-        <Button
-          value="Customise"
-          onClick={this.customiseOnClick}
+        <SquadSettingsContainer
+          availableFormations={availableFormations}
+          selectedFormation={this.state.squadInfo.formation}
+          formationOnChange={this.formationOnChange}
+          squadName={this.state.squadInfo.name}
+          squadNameOnChange={this.nameOnChange}
+          shirtOptionsOnClick={this.openShirtOptions}
         />
         <Pitch
           formation={this.state.squadInfo.formation}
+          onPlayerClick={this.openPlayerOptions}
           players={this.state.players}
+          playerNameOnChange={this.playerNameOnChange}
+        />
+        <ModalManager
+          modalComponent={this.state.modalComponent}
+          players={this.state.players}
+          editingPositionId={this.state.editingPositionId}
+          playerNameOnChange={this.playerNameOnChange}
+          modalIsOpen={this.state.modalIsOpen}
+          closeModal={this.closeModal}
         />
       </div>
     );
