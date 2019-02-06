@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import Button from './components/Button.jsx';
 import Pitch from './components/Pitch.jsx';
-import PlayerOptionsContainer from './components/PlayerOptionsContainer.jsx';
-import ShirtOptionsContainer from './components/ShirtOptionsContainer.jsx';
+import ModalManager from './components/ModalManager.jsx';
 import SquadSettingsContainer from './components/SquadSettingsContainer.jsx';
-import Modal from 'react-modal';
 
 // TODO: Pull from config or some external source
 const availableFormations = [
@@ -227,19 +224,6 @@ class App extends Component {
   };
 
   render() {
-    let modalComponent = false;
-    if (this.state.modalComponent === 'shirtOptions') {
-      modalComponent = <ShirtOptionsContainer />;
-    }
-
-    if (this.state.modalComponent === 'playerOptions') {
-      modalComponent = <PlayerOptionsContainer
-        players={this.state.players}
-        editingPositionId={this.state.editingPositionId}
-        playerNameOnChange={this.playerNameOnChange}
-      />;
-    }
-
     return (
       <div className="app">
         <SquadSettingsContainer
@@ -256,10 +240,14 @@ class App extends Component {
           players={this.state.players}
           playerNameOnChange={this.playerNameOnChange}
         />
-        <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
-          <Button value="Close" onClick={this.closeModal} />
-          {modalComponent}
-        </Modal>
+        <ModalManager
+          modalComponent={this.state.modalComponent}
+          players={this.state.players}
+          editingPositionId={this.state.editingPositionId}
+          playerNameOnChange={this.playerNameOnChange}
+          modalIsOpen={this.state.modalIsOpen}
+          closeModal={this.closeModal}
+        />
       </div>
     );
   }
