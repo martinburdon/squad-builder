@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import Select from './components/Select.jsx';
-import Input from './components/Input.jsx';
 import Button from './components/Button.jsx';
 import Pitch from './components/Pitch.jsx';
 import PlayerOptionsContainer from './components/PlayerOptionsContainer.jsx';
 import ShirtOptionsContainer from './components/ShirtOptionsContainer.jsx';
+import SquadSettingsContainer from './components/SquadSettingsContainer.jsx';
 import Modal from 'react-modal';
 
 // TODO: Pull from config or some external source
@@ -243,18 +242,13 @@ class App extends Component {
 
     return (
       <div className="app">
-        <Select
-          data={availableFormations}
-          selected={this.state.squadInfo.formation}
-          onChange={this.formationOnChange}
-        />
-        <Input
-          value={this.state.squadInfo.name}
-          onChange={this.nameOnChange}
-        />
-        <Button
-          value="Shirt Options"
-          onClick={this.openShirtOptions}
+        <SquadSettingsContainer
+          availableFormations={availableFormations}
+          selectedFormation={this.state.squadInfo.formation}
+          formationOnChange={this.formationOnChange}
+          squadName={this.state.squadInfo.name}
+          squadNameOnChange={this.nameOnChange}
+          shirtOptionsOnClick={this.openShirtOptions}
         />
         <Pitch
           formation={this.state.squadInfo.formation}
