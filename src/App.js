@@ -210,8 +210,17 @@ class App extends Component {
     });
   };
 
-  playerNameOnChange = (name, id) => {
-    console.log(':: hi');
+  playerNameOnChange = ({ value, positionId }) => {
+    const state = this.state.players;
+    const newState = state.map(player => {
+      let name = player.name;
+      if (player.positionId === positionId) name = value;
+      return {
+        ...player,
+        name
+      }
+    });
+    this.setState({ players: newState });
   };
 
   render() {

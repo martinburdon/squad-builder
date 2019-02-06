@@ -28,9 +28,13 @@ export default ({
       {captain ? <i>C</i> : null}
       <span>{shirtNumber}</span>
       <span>{name}</span>
-      <Input
+      <input
+        type="text"
         value={name}
-        onChange={playerNameOnChange}
+        onChange={(e) => playerNameOnChange({
+          value: e.target.value,
+          positionId
+        })}
       />
     </Player>
   )
