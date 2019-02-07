@@ -1,18 +1,11 @@
 import React from 'react';
+import { formations } from '../../formations.js';
 
-const handleChange = (e, data, onChange, updatePlayerPositions) => {
-  const selectedValue = e.target.value;
-  const selectedFormation = data.find(item => item.value === selectedValue);
-  const positions = selectedFormation.positions;
-  // delete selectedFormation.positions;
-  onChange(selectedFormation);
-  updatePlayerPositions(positions);
-};
+export default ({ onChange, selected }) => {
+  const options = formations.map((item, x) => <option value={item.value} key={x}>{item.display}</option>);
 
-export default ({ data, onChange, selected, updatePlayerPositions }) => {
-  const options = data.map((item, x) => <option value={item.value} key={x}>{item.display}</option>);
   return (
-    <select value={selected.value} onChange={(e) => handleChange(e, data, onChange, updatePlayerPositions)}>
+    <select value={selected.value} onChange={(e) => onChange(e.target.value)}>
       {options}
     </select>
   );

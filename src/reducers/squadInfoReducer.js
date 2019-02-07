@@ -1,3 +1,4 @@
+import { formations } from '../formations.js';
 import {
   UPDATE_SQUAD_NAME,
   UPDATE_SQUAD_FORMATION
@@ -23,9 +24,11 @@ export default function(state = initialState, action) {
     }
 
     case UPDATE_SQUAD_FORMATION: {
+      const formation = formations.find(item => item.value === action.formation);
+
       return {
         ...state,
-        formation: action.formation
+        formation
       }
     }
 

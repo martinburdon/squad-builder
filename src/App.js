@@ -2,49 +2,8 @@ import React, { Component } from 'react';
 import Pitch from './components/Pitch.jsx';
 import ModalManager from './components/ModalManager.jsx';
 import SquadSettingsContainer from './components/SquadSettings/SquadSettingsContainer.jsx';
+import { updateSquadFormation } from './actions/actions.js';
 import { connect } from 'react-redux';
-
-import {
-  updatePlayerPositions
-} from './actions/actions.js'
-
-// TODO: Pull from config or some external source
-const availableFormations = [
-  {
-    display: '4-4-2',
-    value: '442',
-    positions: [
-      { x: 17.5, y: 40 },
-      { x: 3, y: 30 },
-      { x: 13, y: 30 },
-      { x: 22, y: 30 },
-      { x: 32, y: 30 },
-      { x: 3, y: 20 },
-      { x: 13, y: 20 },
-      { x: 22, y: 20 },
-      { x: 32, y: 20 },
-      { x: 13, y: 10 },
-      { x: 22, y: 10 }
-    ]
-  },
-  {
-    display: '4-2-3-1',
-    value: '4231',
-    positions: [
-      { x: 17.5, y: 40 },
-      { x: 3, y: 30 },
-      { x: 13, y: 30 },
-      { x: 22, y: 30 },
-      { x: 32, y: 30 },
-      { x: 13, y: 20 },
-      { x: 22, y: 20 },
-      { x: 3, y: 12 },
-      { x: 32, y: 12 },
-      { x: 17.5, y: 13 },
-      { x: 17.5, y: 6 }
-    ]
-  }
-];
 
 class App extends Component {
   state = {
@@ -61,7 +20,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.updatePlayerPositions();
+    this.props.dispatchUpdateSquadFormation(this.props.squadInfo.formation.value);
   }
 
   openModal = () => {
@@ -74,12 +33,6 @@ class App extends Component {
       modalIsOpen: false
     });
   };
-
-  updatePlayerPositions() {
-    // Get the positions for the current formation
-    let currentPositions = availableFormations.find(item => item.value === this.props.squadInfo.formation.value).positions;
-    this.props.updatePlayerPositions(currentPositions);
-  }
 
   openShirtOptions = () => {
     this.setState({ modalComponent: 'shirtOptions' }, () => {
@@ -113,7 +66,6 @@ class App extends Component {
     return (
       <div className="app">
         <SquadSettingsContainer
-          availableFormations={availableFormations}
           shirtOptionsOnClick={this.openShirtOptions}
         />
         <Pitch
@@ -135,14 +87,13 @@ class App extends Component {
   }
 }
 
-// TODO: Add state needed here (if any)
 const mapStateToProps = state => ({
   squadInfo: state.squadInfo,
   players: state.players
 });
 
 const mapDispatchToProps = dispatch => ({
-  updatePlayerPositions: positions => dispatch(updatePlayerPositions(positions))
+  dispatchUpdateSquadFormation: formation => dispatch(updateSquadFormation(formation))
 });
 
 export default connect(

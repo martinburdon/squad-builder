@@ -1,6 +1,5 @@
-import {
-  UPDATE_PLAYER_POSITIONS
-} from '../actions/actions.js'
+import { formations } from '../formations.js';
+import { UPDATE_SQUAD_FORMATION } from '../actions/actions.js'
 
 const initialState = [
   {
@@ -95,12 +94,13 @@ const initialState = [
 
 export default function(state = initialState, action) {
   switch(action.type) {
-    case UPDATE_PLAYER_POSITIONS: {
-      console.log(':: action ', action);
+    case UPDATE_SQUAD_FORMATION: {
+      const formation = formations.find(item => item.value === action.formation);
+      const positions = formation.positions;
       const newState = state.map((item, i) => {
         return {
           ...item,
-          positions: action.positions[i]
+          positions: positions[i]
         }
       })
       return newState

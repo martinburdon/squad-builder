@@ -3,31 +3,27 @@ import FormationSelect from './FormationSelect.jsx';
 import Input from '../Input.jsx';
 import Button from '../Button.jsx';
 import { connect } from 'react-redux';
+
 import {
   updateSquadName,
-  updateSquadFormation,
-  updatePlayerPositions
-} from '../../actions/actions.js'
+  updateSquadFormation
+} from '../../actions/actions.js';
 
 const SquadSettingsContainer = ({
-  availableFormations,
   shirtOptionsOnClick,
   squadInfo,
-  updateSquadName,
-  updateSquadFormation,
-  updatePlayerPositions
+  dispatchUpdateSquadName,
+  dispatchUpdateSquadFormation
 }) => {
   return (
     <section>
       <FormationSelect
-        data={availableFormations}
         selected={squadInfo.formation}
-        onChange={updateSquadFormation}
-        updatePlayerPositions={updatePlayerPositions}
+        onChange={dispatchUpdateSquadFormation}
       />
       <Input
         value={squadInfo.name}
-        onChange={updateSquadName}
+        onChange={dispatchUpdateSquadName}
       />
       <Button
         value="Shirt Options"
@@ -42,9 +38,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateSquadName: name => dispatch(updateSquadName(name)),
-  updateSquadFormation: formation => dispatch(updateSquadFormation(formation)),
-  updatePlayerPositions: positions => dispatch(updatePlayerPositions(positions))
+  dispatchUpdateSquadName: name => dispatch(updateSquadName(name)),
+  dispatchUpdateSquadFormation: formation => dispatch(updateSquadFormation(formation))
 });
 
 export default connect(
