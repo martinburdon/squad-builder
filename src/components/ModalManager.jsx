@@ -3,16 +3,19 @@ import Modal from 'react-modal';
 import ShirtOptionsContainer from './ShirtOptionsContainer.jsx';
 import PlayerOptionsContainer from './PlayerOptionsContainer.jsx';
 import Button from './Button.jsx';
+import { connect } from 'react-redux';
+import {
+  setModalComponent,
+  toggleModal
+} from '../actions/actions.js';
 
 Modal.setAppElement('#root');
 
-export default ({
+const ModalManager = ({
   modalComponent,
-  players,
-  editingPositionId,
-  playerNameOnChange,
   modalIsOpen,
-  closeModal
+  dispatchSetModalComponent,
+  dispatchToggleModal
 }) => {
   let childComponent = false;
   if (modalComponent === 'shirtOptions') {
@@ -20,17 +23,28 @@ export default ({
   }
 
   if (modalComponent === 'playerOptions') {
-    childComponent = <PlayerOptionsContainer
-      players={players}
-      editingPositionId={editingPositionId}
-      playerNameOnChange={playerNameOnChange}
-    />;
+    childComponent = <PlayerOptionsContainer />;
   }
 
   return (
-    <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-      <Button value="Close" onClick={closeModal} />
+    <Modal isOpen={modalIsOpen} onRequestClose={dispatchToggleModal}>
+      <Button value="Close" onClick={dispatchToggleModal} />
       {childComponent}
     </Modal>
   );
 };
+
+const mapStateToProps = state => ({
+  modalComponent: state.modals.modalComponent,
+  modalIsOpen: state.modals.modalIsOpen
+});
+
+const mapDispatchToProps = dispatch => ({
+  dispatchSetModalComponent: component => dispatch(setModalComponent(component)),
+  dispatchToggleModal: () => dispatch(toggleModal())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ModalManager);

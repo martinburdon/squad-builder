@@ -1,9 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-export default ({
+import {
+  updatePlayerName
+} from '../actions/actions.js';
+
+const PlayerOptionsContainer = ({
   editingPositionId,
   players,
-  playerNameOnChange
+  dispatchUpdatePlayerName
 }) => {
   const player = players.find(player => player.positionId === editingPositionId);
 
@@ -13,11 +18,22 @@ export default ({
       <input
         type="text"
         value={player.name}
-        onChange={(e) => playerNameOnChange({
-          value: e.target.value,
-          positionId: editingPositionId
-        })}
+        onChange={(e) => dispatchUpdatePlayerName(editingPositionId, e.target.value)}
       />
     </>
   );
 };
+
+const mapStateToProps = state => ({
+  players: state.players.players,
+  editingPositionId: state.players.editingPositionId
+});
+
+const mapDispatchToProps = dispatch => ({
+  dispatchUpdatePlayerName: (playerId, name) => dispatch(updatePlayerName(playerId, name))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PlayerOptionsContainer);
