@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import Pitch from './components/Pitch.jsx';
 import ModalManager from './components/ModalManager.jsx';
-import SquadSettingsContainer from './components/SquadSettingsContainer.jsx';
+import SquadSettingsContainer from './components/SquadSettings/SquadSettingsContainer.jsx';
+import { connect } from 'react-redux';
+
+import {
+  updatePlayerPositions
+} from './actions/actions.js'
 
 // TODO: Pull from config or some external source
 const availableFormations = [
@@ -46,111 +51,13 @@ class App extends Component {
     modalComponent: false,
     modalIsOpen: false,
     editingPositionId: false,
-    squadInfo: {
-      formation: {
-        display: '4-4-2',
-        value: '442'
-      },
-      name: 'Sunderland',
-      numberOfPlayers: 11
-    },
     shirtStyle: {
       style: 'fmclassic',
       colourPrimary: 'red',
       colourSecondary: 'white',
       colourText: 'black'
     },
-    pitchStyle: '',
-    players: [
-      {
-        arrow: false,
-        captain: true,
-        name: 'McGloughan',
-        positionId: 1,
-        shirtNumber: 1,
-        positions: { x: 0, y: 0 }
-      },
-      {
-        arrow: false,
-        captain: false,
-        name: '',
-        positionId: 2,
-        shirtNumber: 2,
-        positions: { x: 0, y: 0 }
-      },
-      {
-        arrow: false,
-        captain: false,
-        name: '',
-        positionId: 3,
-        shirtNumber: 3,
-        positions: { x: 0, y: 0 }
-      },
-      {
-        arrow: false,
-        captain: false,
-        name: '',
-        positionId: 4,
-        shirtNumber: 4,
-        positions: { x: 0, y: 0 }
-      },
-      {
-        arrow: false,
-        captain: false,
-        name: '',
-        positionId: 5,
-        shirtNumber: 5,
-        positions: { x: 0, y: 0 }
-      },
-      {
-        arrow: false,
-        captain: false,
-        name: '',
-        positionId: 6,
-        shirtNumber: 6,
-        positions: { x: 0, y: 0 }
-      },
-      {
-        arrow: false,
-        captain: false,
-        name: '',
-        positionId: 7,
-        shirtNumber: 7,
-        positions: { x: 0, y: 0 }
-      },
-      {
-        arrow: false,
-        captain: false,
-        name: '',
-        positionId: 8,
-        shirtNumber: 8,
-        positions: { x: 0, y: 0 }
-      },
-      {
-        arrow: false,
-        captain: false,
-        name: '',
-        positionId: 9,
-        shirtNumber: 9,
-        positions: { x: 0, y: 0 }
-      },
-      {
-        arrow: false,
-        captain: false,
-        name: '',
-        positionId: 10,
-        shirtNumber: 10,
-        positions: { x: 0, y: 0 }
-      },
-      {
-        arrow: false,
-        captain: false,
-        name: '',
-        positionId: 11,
-        shirtNumber: 11,
-        positions: { x: 0, y: 0 }
-      }
-    ]
+    pitchStyle: ''
   };
 
   componentDidMount() {
@@ -170,30 +77,9 @@ class App extends Component {
 
   updatePlayerPositions() {
     // Get the positions for the current formation
-    let currentPositions = availableFormations.find(item => item.value === this.state.squadInfo.formation.value).positions;
-
-    // Set each players position based on the current formation
-    const newPlayersState = this.state.players.map((player, i) => ({
-      ...player,
-      positions: currentPositions[i]
-    }));
-
-    this.setState({ players: newPlayersState });
+    let currentPositions = availableFormations.find(item => item.value === this.props.squadInfo.formation.value).positions;
+    this.props.updatePlayerPositions(currentPositions);
   }
-
-  formationOnChange = formation => {
-    const squadInfo = { ...this.state.squadInfo };
-    squadInfo.formation = formation;
-    this.setState({ squadInfo }, () => {
-      this.updatePlayerPositions();
-    });
-  };
-
-  nameOnChange = name => {
-    const squadInfo = { ...this.state.squadInfo };
-    squadInfo.name = name;
-    this.setState({ squadInfo });
-  };
 
   openShirtOptions = () => {
     this.setState({ modalComponent: 'shirtOptions' }, () => {
@@ -211,7 +97,7 @@ class App extends Component {
   };
 
   playerNameOnChange = ({ value, positionId }) => {
-    const state = this.state.players;
+    const state = this.props.players;
     const newState = state.map(player => {
       let name = player.name;
       if (player.positionId === positionId) name = value;
@@ -228,21 +114,17 @@ class App extends Component {
       <div className="app">
         <SquadSettingsContainer
           availableFormations={availableFormations}
-          selectedFormation={this.state.squadInfo.formation}
-          formationOnChange={this.formationOnChange}
-          squadName={this.state.squadInfo.name}
-          squadNameOnChange={this.nameOnChange}
           shirtOptionsOnClick={this.openShirtOptions}
         />
         <Pitch
-          formation={this.state.squadInfo.formation}
+          formation={this.props.squadInfo.formation}
           onPlayerClick={this.openPlayerOptions}
-          players={this.state.players}
+          players={this.props.players}
           playerNameOnChange={this.playerNameOnChange}
         />
         <ModalManager
           modalComponent={this.state.modalComponent}
-          players={this.state.players}
+          players={this.props.players}
           editingPositionId={this.state.editingPositionId}
           playerNameOnChange={this.playerNameOnChange}
           modalIsOpen={this.state.modalIsOpen}
@@ -253,4 +135,17 @@ class App extends Component {
   }
 }
 
-export default App;
+// TODO: Add state needed here (if any)
+const mapStateToProps = state => ({
+  squadInfo: state.squadInfo,
+  players: state.players
+});
+
+const mapDispatchToProps = dispatch => ({
+  updatePlayerPositions: positions => dispatch(updatePlayerPositions(positions))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
