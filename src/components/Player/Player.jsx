@@ -12,22 +12,13 @@ const Player = styled.div`
   width: 5rem;
 `;
 
-export default ({
-  arrow,
-  captain,
-  name,
-  onPlayerClick,
-  positionId,
-  shirtNumber,
-  positions,
-  playerNameOnChange
-}) => {
-  const { x, y } = positions;
+export default ({ player, onClick }) => {
+  const { x, y } = player.positions;
   return (
-    <Player x={x} y={y} onClick={() => onPlayerClick(positionId)}>
-      {captain ? <i>C</i> : null}
-      <span>{shirtNumber}</span>
-      <span>{name}</span>
+    <Player x={x} y={y} onClick={onClick}>
+      {player.captain ? <i>C</i> : null}
+      <span>{player.shirtNumber}</span>
+      <span>{player.name}</span>
     </Player>
   )
 };
