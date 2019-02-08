@@ -6,16 +6,6 @@ import { updateSquadFormation } from './actions/index.js';
 import { connect } from 'react-redux';
 
 class App extends Component {
-  state = {
-    shirtStyle: {
-      style: 'fmclassic',
-      colourPrimary: 'red',
-      colourSecondary: 'white',
-      colourText: 'black'
-    },
-    pitchStyle: ''
-  };
-
   componentDidMount() {
     this.props.dispatch(updateSquadFormation(this.props.squadInfo.formation.value));
   }

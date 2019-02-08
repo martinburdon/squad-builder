@@ -15,7 +15,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         modalComponent: action.data.component,
-        modalPayload: action.data.payload,
+        modalPayload: action.data.payload || {},
         modalIsOpen: true
       }
     }

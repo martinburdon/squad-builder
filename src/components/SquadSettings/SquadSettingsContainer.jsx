@@ -25,7 +25,9 @@ const SquadSettingsContainer = ({
         onChange={(e) => dispatch(updateSquadName(e.target.value))}
       />
       <button
-        onClick={() => dispatch(setModalComponent('shirtOptions'))}>
+        onClick={() => dispatch(setModalComponent({
+          component: 'shirtOptions'
+        }))}>
         Shirt Options
       </button>
     </section>

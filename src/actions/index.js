@@ -52,3 +52,47 @@ export function updatePlayerName(positionId, name) {
     name
   }
 }
+
+/**
+ *  Squad Style
+ */
+export const SET_SHIRT_STYLE = 'SET_SHIRT_STYLE';
+export const SET_SHIRT_PRIMARY_COLOUR = 'SET_SHIRT_PRIMARY_COLOUR';
+export const SET_SHIRT_SECONDARY_COLOUR = 'SET_SHIRT_SECONDARY_COLOUR';
+export const SET_SHIRT_TEXT_COLOUR = 'SET_SHIRT_TEXT_COLOUR';
+export const SET_PITCH_STYLE = 'SET_PITCH_STYLE';
+
+export function updateShirtStyle(style) {
+  return {
+    type: SET_SHIRT_STYLE,
+    style
+  }
+}
+
+export function updateShirtPrimaryColour(colour) {
+  return {
+    type: SET_SHIRT_PRIMARY_COLOUR,
+    colour
+  }
+}
+
+export function updateShirtSecondaryColour(colour) {
+  return {
+    type: SET_SHIRT_SECONDARY_COLOUR,
+    colour
+  }
+}
+
+export function updateShirtTextColour(colour) {
+  return {
+    type: SET_SHIRT_TEXT_COLOUR,
+    colour
+  }
+}
+
+export function updatePitchStyle(style) {
+  return {
+    type: SET_PITCH_STYLE,
+    style
+  }
+}
