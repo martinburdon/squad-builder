@@ -1,32 +1,31 @@
 import React from 'react';
-import FormationSelect from './FormationSelect.jsx';
 import { connect } from 'react-redux';
-
+import { formations } from '../../formations.js';
 import {
   updateSquadName,
   updateSquadFormation,
   setModalComponent
-} from '../../actions/actions.js';
+} from '../../actions/index.js';
 
 const SquadSettingsContainer = ({
-  dispatchSetModalComponent,
   squadInfo,
-  dispatchUpdateSquadName,
-  dispatchUpdateSquadFormation
+  dispatch
 }) => {
   return (
     <section>
-      <FormationSelect
-        selected={squadInfo.formation}
-        onChange={dispatchUpdateSquadFormation}
-      />
+      <select
+        value={squadInfo.formation}
+        onChange={(e) => dispatch(updateSquadFormation(e.target.value))}
+      >
+        {formations.map((item, x) => <option value={item.value} key={x}>{item.display}</option>)}
+      </select>
       <input
         type="text"
         value={squadInfo.name}
-        onChange={(e) => dispatchUpdateSquadName(e.target.value)}
+        onChange={(e) => dispatch(updateSquadName(e.target.value))}
       />
       <button
-        onClick={() => dispatchSetModalComponent('shirtOptions')}>
+        onClick={() => dispatch(setModalComponent('shirtOptions'))}>
         Shirt Options
       </button>
     </section>
@@ -37,13 +36,4 @@ const mapStateToProps = state => ({
   squadInfo: state.squadInfo
 });
 
-const mapDispatchToProps = dispatch => ({
-  dispatchUpdateSquadName: name => dispatch(updateSquadName(name)),
-  dispatchUpdateSquadFormation: formation => dispatch(updateSquadFormation(formation)),
-  dispatchSetModalComponent: component => dispatch(setModalComponent(component))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SquadSettingsContainer);
+export default connect(mapStateToProps)(SquadSettingsContainer);

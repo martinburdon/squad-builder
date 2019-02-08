@@ -12,10 +12,7 @@ const Player = styled.div`
   width: 5rem;
 `;
 
-export default ({
-  player,
-  onClick
-}) => {
+export default ({ player, onClick }) => {
   const { x, y } = player.positions;
   return (
     <Player x={x} y={y} onClick={onClick}>

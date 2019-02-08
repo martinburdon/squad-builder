@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PitchContainer from './components/Pitch/PitchContainer.jsx';
 import ModalManager from './components/ModalManager/ModalManager.jsx';
 import SquadSettingsContainer from './components/SquadSettings/SquadSettingsContainer.jsx';
-import { updateSquadFormation } from './actions/actions.js';
+import { updateSquadFormation } from './actions/index.js';
 import { connect } from 'react-redux';
 
 class App extends Component {

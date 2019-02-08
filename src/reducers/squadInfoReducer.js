@@ -2,7 +2,7 @@ import { formations } from '../formations.js';
 import {
   UPDATE_SQUAD_NAME,
   UPDATE_SQUAD_FORMATION
-} from '../actions/actions.js';
+} from '../actions/index.js';
 
 const initialState = {
   formation: {

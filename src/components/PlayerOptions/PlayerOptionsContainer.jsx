@@ -1,16 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { updatePlayerName } from '../../actions/index.js';
 
-import {
-  updatePlayerName
-} from '../../actions/actions.js';
-
-const PlayerOptionsContainer = ({
-  editingPositionId,
-  players,
-  dispatchUpdatePlayerName
-}) => {
-  const player = players.find(player => player.positionId === editingPositionId);
+const PlayerOptionsContainer = (props) => {
+  const player = props.players.find(player => player.positionId === props.positionId);
 
   return (
     <>
@@ -18,15 +11,14 @@ const PlayerOptionsContainer = ({
       <input
         type="text"
         value={player.name}
-        onChange={(e) => dispatchUpdatePlayerName(editingPositionId, e.target.value)}
+        onChange={(e) => props.dispatchUpdatePlayerName(props.positionId, e.target.value)}
       />
     </>
   );
 };
 
 const mapStateToProps = state => ({
-  players: state.players.players,
-  editingPositionId: state.players.editingPositionId
+  players: state.players.players
 });
 
 const mapDispatchToProps = dispatch => ({

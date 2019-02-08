@@ -1,28 +1,37 @@
 import {
   MODAL_SET_COMPONENT,
   MODAL_TOGGLE
-} from '../actions/actions.js'
+} from '../actions/index.js'
 
 const initialState = {
   modalComponent: false,
+  modalPayload: {},
   modalIsOpen: false
 };
 
 export default function(state = initialState, action) {
-  console.log(action);
   switch (action.type) {
     case MODAL_SET_COMPONENT: {
       return {
         ...state,
-        modalComponent: action.component,
+        modalComponent: action.data.component,
+        modalPayload: action.data.payload,
         modalIsOpen: true
       }
     }
 
     case MODAL_TOGGLE: {
+      const modalIsOpen = !state.modalIsOpen;
+      const updatedState = { modalIsOpen };
+
+      if (!modalIsOpen) {
+        updatedState.modalPayload = {};
+        updatedState.modalComponent = false;
+      }
+
       return {
         ...state,
-        modalIsOpen: !state.modalIsOpen
+        ...updatedState
       }
     }
 

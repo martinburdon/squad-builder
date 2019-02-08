@@ -1,12 +1,10 @@
 import { formations } from '../formations.js';
 import {
   UPDATE_SQUAD_FORMATION,
-  SET_EDITING_POSITION,
   UPDATE_PLAYER_NAME
-} from '../actions/actions.js'
+} from '../actions/index.js'
 
 const initialState = {
-  editingPositionId: false,
   players: [
     {
       arrow: false,
@@ -113,13 +111,6 @@ export default function(state = initialState, action) {
       return {
         ...state,
         players: newState
-      }
-    }
-
-    case SET_EDITING_POSITION: {
-      return {
-        ...state,
-        editingPositionId: action.positionId
       }
     }
 

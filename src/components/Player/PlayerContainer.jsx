@@ -1,22 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Player from './Player.jsx';
 import { connect } from 'react-redux';
-import {
-  setEditingPosition,
-  setModalComponent
-} from '../../actions/actions.js';
+import { setModalComponent } from '../../actions/index.js';
 
-class PlayerContainer extends Component {
-  onPlayerClick = () => {
-    this.props.dispatch(setModalComponent('playerOptions'));
-    this.props.dispatch(setEditingPosition(this.props.player.positionId));
-  }
-
-  render() {
-    return (
-      <Player player={this.props.player} onClick={this.onPlayerClick} />
-    );
-  }
+const PlayerContainer = ({ player, dispatch }) => {
+  return (
+    <Player
+      player={player}
+      onClick={() => dispatch(setModalComponent({
+        component: 'playerOptions',
+        payload: {
+          positionId: player.positionId
+        }
+      }))}
+    />
+  );
 };
 
 export default connect()(PlayerContainer);

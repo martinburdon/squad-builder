@@ -6,19 +6,20 @@ import { connect } from 'react-redux';
 import {
   setModalComponent,
   toggleModal
-} from '../../actions/actions.js';
+} from '../../actions/index.js';
 
 Modal.setAppElement('#root');
 
 const ModalManager = ({
   modalComponent,
+  modalPayload,
   modalIsOpen,
   dispatchSetModalComponent,
   dispatchToggleModal
 }) => {
   let childComponent = false;
-  if (modalComponent === 'shirtOptions') childComponent = <ShirtOptionsContainer />;
-  if (modalComponent === 'playerOptions') childComponent = <PlayerOptionsContainer />;
+  if (modalComponent === 'shirtOptions') childComponent = <ShirtOptionsContainer {...modalPayload} />;
+  if (modalComponent === 'playerOptions') childComponent = <PlayerOptionsContainer {...modalPayload} />;
 
   return (
     <Modal isOpen={modalIsOpen} onRequestClose={dispatchToggleModal}>
@@ -30,6 +31,7 @@ const ModalManager = ({
 
 const mapStateToProps = state => ({
   modalComponent: state.modals.modalComponent,
+  modalPayload: state.modals.modalPayload,
   modalIsOpen: state.modals.modalIsOpen
 });
 

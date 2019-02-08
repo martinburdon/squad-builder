@@ -9,17 +9,9 @@ const Pitch = styled.div`
   width: 40rem;
 `;
 
-export default ({
-  formation,
-  players
-}) => {
+export default ({ players }) => {
   const data = players.map((player, x) => {
-    return (
-      <PlayerContainer
-        player={player}
-        key={x}
-      />
-    )
+    return <PlayerContainer player={player} key={x} />;
   });
 
   return <Pitch>{data}</Pitch>;
