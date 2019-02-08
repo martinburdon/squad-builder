@@ -1,40 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Player from './Player.jsx';
 import { connect } from 'react-redux';
-
 import {
   setEditingPosition,
-  setModalComponent,
-  toggleModal
+  setModalComponent
 } from '../../actions/actions.js';
 
-const PlayerContainer = ({
-  dispatchSetEditingPosition,
-  dispatchSetModalComponent,
-  dispatchToggleModal,
-  player
-}) => {
-  return (
-    <Player
-      dispatchSetEditingPosition={dispatchSetEditingPosition}
-      dispatchSetModalComponent={dispatchSetModalComponent}
-      dispatchToggleModal={dispatchToggleModal}
-      player={player}
-    />
-  );
+class PlayerContainer extends Component {
+  onPlayerClick = () => {
+    this.props.dispatch(setModalComponent('playerOptions'));
+    this.props.dispatch(setEditingPosition(this.props.player.positionId));
+  }
+
+  render() {
+    return (
+      <Player player={this.props.player} onClick={this.onPlayerClick} />
+    );
+  }
 };
 
-const mapStateToProps = state => ({
-  squadInfo: state.squadInfo
-});
-
-const mapDispatchToProps = dispatch => ({
-  dispatchSetEditingPosition: name => dispatch(setEditingPosition(name)),
-  dispatchSetModalComponent: component => dispatch(setModalComponent(component)),
-  dispatchToggleModal: () => dispatch(toggleModal())
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PlayerContainer);
+export default connect()(PlayerContainer);

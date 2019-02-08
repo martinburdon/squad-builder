@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import {
   updatePlayerName
-} from '../actions/actions.js';
+} from '../../actions/actions.js';
 
 const PlayerOptionsContainer = ({
   editingPositionId,

@@ -1,16 +1,15 @@
 import React from 'react';
 import FormationSelect from './FormationSelect.jsx';
-import Input from '../Input.jsx';
-import Button from '../Button.jsx';
 import { connect } from 'react-redux';
 
 import {
   updateSquadName,
-  updateSquadFormation
+  updateSquadFormation,
+  setModalComponent
 } from '../../actions/actions.js';
 
 const SquadSettingsContainer = ({
-  shirtOptionsOnClick,
+  dispatchSetModalComponent,
   squadInfo,
   dispatchUpdateSquadName,
   dispatchUpdateSquadFormation
@@ -21,14 +20,15 @@ const SquadSettingsContainer = ({
         selected={squadInfo.formation}
         onChange={dispatchUpdateSquadFormation}
       />
-      <Input
+      <input
+        type="text"
         value={squadInfo.name}
-        onChange={dispatchUpdateSquadName}
+        onChange={(e) => dispatchUpdateSquadName(e.target.value)}
       />
-      <Button
-        value="Shirt Options"
-        onClick={shirtOptionsOnClick}
-      />
+      <button
+        onClick={() => dispatchSetModalComponent('shirtOptions')}>
+        Shirt Options
+      </button>
     </section>
   )
 };
@@ -39,7 +39,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   dispatchUpdateSquadName: name => dispatch(updateSquadName(name)),
-  dispatchUpdateSquadFormation: formation => dispatch(updateSquadFormation(formation))
+  dispatchUpdateSquadFormation: formation => dispatch(updateSquadFormation(formation)),
+  dispatchSetModalComponent: component => dispatch(setModalComponent(component))
 });
 
 export default connect(

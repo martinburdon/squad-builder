@@ -12,38 +12,13 @@ const Player = styled.div`
   width: 5rem;
 `;
 
-const onClick = ({
-  dispatchSetModalComponent,
-  playerNameOnChange,
-  dispatchSetEditingPosition,
-  dispatchToggleModal,
-  positionId
-}) => {
-  dispatchSetModalComponent('playerOptions');
-  dispatchSetEditingPosition(positionId);
-};
-
 export default ({
   player,
-  dispatchSetModalComponent,
-  playerNameOnChange,
-  dispatchSetEditingPosition,
-  dispatchToggleModal
+  onClick
 }) => {
   const { x, y } = player.positions;
-  // TODO: Set player.positionId on click
   return (
-    <Player
-      x={x}
-      y={y}
-      onClick={() => onClick({
-        dispatchSetModalComponent,
-        playerNameOnChange,
-        dispatchSetEditingPosition,
-        dispatchToggleModal,
-        positionId: player.positionId
-      })}
-    >
+    <Player x={x} y={y} onClick={onClick}>
       {player.captain ? <i>C</i> : null}
       <span>{player.shirtNumber}</span>
       <span>{player.name}</span>

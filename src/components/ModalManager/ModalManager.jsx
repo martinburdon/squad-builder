@@ -1,13 +1,12 @@
 import React from 'react';
 import Modal from 'react-modal';
-import ShirtOptionsContainer from './ShirtOptionsContainer.jsx';
-import PlayerOptionsContainer from './PlayerOptionsContainer.jsx';
-import Button from './Button.jsx';
+import ShirtOptionsContainer from '../ShirtOptions/ShirtOptionsContainer.jsx';
+import PlayerOptionsContainer from '../PlayerOptions/PlayerOptionsContainer.jsx';
 import { connect } from 'react-redux';
 import {
   setModalComponent,
   toggleModal
-} from '../actions/actions.js';
+} from '../../actions/actions.js';
 
 Modal.setAppElement('#root');
 
@@ -18,17 +17,12 @@ const ModalManager = ({
   dispatchToggleModal
 }) => {
   let childComponent = false;
-  if (modalComponent === 'shirtOptions') {
-    childComponent = <ShirtOptionsContainer />;
-  }
-
-  if (modalComponent === 'playerOptions') {
-    childComponent = <PlayerOptionsContainer />;
-  }
+  if (modalComponent === 'shirtOptions') childComponent = <ShirtOptionsContainer />;
+  if (modalComponent === 'playerOptions') childComponent = <PlayerOptionsContainer />;
 
   return (
     <Modal isOpen={modalIsOpen} onRequestClose={dispatchToggleModal}>
-      <Button value="Close" onClick={dispatchToggleModal} />
+      <button onClick={dispatchToggleModal}>Close</button>
       {childComponent}
     </Modal>
   );
