@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Player = styled.div`
   align-items: center;
-  background: teal;
+  background: ${props => `${props.shirtStyle.colourPrimary}`};
   display: flex;
   flex-direction: column;
   height: 5rem;
@@ -12,10 +12,10 @@ const Player = styled.div`
   width: 5rem;
 `;
 
-export default ({ player, onClick }) => {
+export default ({ player, onClick, shirtStyle }) => {
   const { x, y } = player.positions;
   return (
-    <Player x={x} y={y} onClick={onClick}>
+    <Player x={x} y={y} onClick={onClick} shirtStyle={shirtStyle}>
       {player.captain ? <i>C</i> : null}
       <span>{player.shirtNumber}</span>
       <span>{player.name}</span>

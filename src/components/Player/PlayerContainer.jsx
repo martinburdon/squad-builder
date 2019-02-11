@@ -3,10 +3,11 @@ import Player from './Player.jsx';
 import { connect } from 'react-redux';
 import { setModalComponent } from '../../actions/index.js';
 
-const PlayerContainer = ({ player, dispatch }) => {
+const PlayerContainer = ({ player, shirtStyle, dispatch }) => {
   return (
     <Player
       player={player}
+      shirtStyle={shirtStyle}
       onClick={() => dispatch(setModalComponent({
         component: 'playerOptions',
         payload: {
@@ -17,4 +18,8 @@ const PlayerContainer = ({ player, dispatch }) => {
   );
 };
 
-export default connect()(PlayerContainer);
+const mapStateToProps = state => ({
+  shirtStyle: state.squadStyles.shirtStyle
+});
+
+export default connect(mapStateToProps)(PlayerContainer);

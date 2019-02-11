@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ColourPicker from './ColourPicker.jsx';
+import Player from '../Player/Player.jsx';
 import {
   updateShirtStyle,
   updateShirtPrimaryColour,
@@ -11,14 +12,29 @@ import {
 
 const ShirtOptionsContainer = ({
   dispatch,
-  squadStyles
+  squadStyles,
+  shirtStyle
 }) => {
+  const player = {
+    name: 'Grigg',
+    shirtNumber: '9',
+    positions: {
+      x: 0,
+      y: 0
+    }
+  };
   return (
     <>
       <h2>Shirt Options</h2>
 
+      <Player
+        player={player}
+        onClick={null}
+        shirtStyle={shirtStyle}
+      />
+
       <select
-        value={squadStyles.shirtStyle.style}
+        value={shirtStyle.style}
         onChange={(e) => dispatch(updateShirtStyle(e.target.value))}
       >
         <option value="fmclassic">FM Classic</option>
@@ -26,17 +42,17 @@ const ShirtOptionsContainer = ({
       </select>
 
       <ColourPicker
-        colour={squadStyles.shirtStyle.colourPrimary}
+        colour={shirtStyle.colourPrimary}
         onChange={(colour) => dispatch(updateShirtPrimaryColour(colour))}
       />
 
       <ColourPicker
-        colour={squadStyles.shirtStyle.colourSecondary}
+        colour={shirtStyle.colourSecondary}
         onChange={(colour) => dispatch(updateShirtSecondaryColour(colour))}
       />
 
       <ColourPicker
-        colour={squadStyles.shirtStyle.colourText}
+        colour={shirtStyle.colourText}
         onChange={(colour) => dispatch(updateShirtTextColour(colour))}
       />
 
@@ -52,7 +68,8 @@ const ShirtOptionsContainer = ({
 };
 
 const mapStateToProps = state => ({
-  squadStyles: state.squadStyles
+  squadStyles: state.squadStyles,
+  shirtStyle: state.squadStyles.shirtStyle
 });
 
 export default connect(mapStateToProps)(ShirtOptionsContainer);
