@@ -30,16 +30,14 @@ const ShirtOptionsContainer = ({
         onChange={(colour) => dispatch(updateShirtPrimaryColour(colour))}
       />
 
-      <input
-        type="text"
-        value={squadStyles.shirtStyle.colourSecondary}
-        onChange={(e) => dispatch(updateShirtSecondaryColour(e.target.value))}
+      <ColourPicker
+        colour={squadStyles.shirtStyle.colourSecondary}
+        onChange={(colour) => dispatch(updateShirtSecondaryColour(colour))}
       />
 
-      <input
-        type="text"
-        value={squadStyles.shirtStyle.colourText}
-        onChange={(e) => dispatch(updateShirtTextColour(e.target.value))}
+      <ColourPicker
+        colour={squadStyles.shirtStyle.colourText}
+        onChange={(colour) => dispatch(updateShirtTextColour(colour))}
       />
 
       <select
