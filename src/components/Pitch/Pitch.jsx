@@ -10,9 +10,6 @@ const Pitch = styled.div`
 `;
 
 export default ({ players }) => {
-  const data = players.map((player, x) => {
-    return <PlayerContainer player={player} key={x} />;
-  });
-
+  const data = players.map((player, x) => <PlayerContainer player={player} key={x} />);
   return <Pitch>{data}</Pitch>;
 };

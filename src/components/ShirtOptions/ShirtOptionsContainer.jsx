@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import ColourPicker from './ColourPicker.jsx';
 import {
   updateShirtStyle,
   updateShirtPrimaryColour,
@@ -24,10 +25,9 @@ const ShirtOptionsContainer = ({
         <option value="shirt">Shirt</option>
       </select>
 
-      <input
-        type="text"
-        value={squadStyles.shirtStyle.colourPrimary}
-        onChange={(e) => dispatch(updateShirtPrimaryColour(e.target.value))}
+      <ColourPicker
+        colour={squadStyles.shirtStyle.colourPrimary}
+        onChange={(colour) => dispatch(updateShirtPrimaryColour(colour))}
       />
 
       <input
