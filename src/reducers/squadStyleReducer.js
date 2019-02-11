@@ -9,9 +9,9 @@ import {
 const initialState = {
   shirtStyle: {
     style: 'fmclassic',
-    colourPrimary: '#fff',
-    colourSecondary: 'white',
-    colourText: 'black',
+    colourPrimary: '#f00',
+    colourSecondary: '#fff',
+    colourText: '#000',
   },
   pitchStyle: 'stripes'
 };
