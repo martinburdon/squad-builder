@@ -9,6 +9,27 @@ import {
   updateShirtTextColour,
   updatePitchStyle
 } from '../../actions/index.js';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+`;
+
+const PlayerContainer = styled.div`
+  display: inline-block;
+  padding: 2rem;
+
+  div {
+    position: relative;
+  }
+`;
+
+const ColourPickerContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
 const ShirtOptionsContainer = ({
   dispatch,
@@ -27,42 +48,48 @@ const ShirtOptionsContainer = ({
     <>
       <h2>Shirt Options</h2>
 
-      <Player
-        player={player}
-        onClick={null}
-        shirtStyle={shirtStyle}
-      />
+      <Wrapper>
+        <ColourPickerContainer>
+          <ColourPicker
+            colour={shirtStyle.colourPrimary}
+            onChange={(colour) => dispatch(updateShirtPrimaryColour(colour))}
+          />
 
-      <select
-        value={shirtStyle.style}
-        onChange={(e) => dispatch(updateShirtStyle(e.target.value))}
-      >
-        <option value="fmclassic">FM Classic</option>
-        <option value="shirt">Shirt</option>
-      </select>
+          <ColourPicker
+            colour={shirtStyle.colourSecondary}
+            onChange={(colour) => dispatch(updateShirtSecondaryColour(colour))}
+          />
 
-      <ColourPicker
-        colour={shirtStyle.colourPrimary}
-        onChange={(colour) => dispatch(updateShirtPrimaryColour(colour))}
-      />
+          <ColourPicker
+            colour={shirtStyle.colourText}
+            onChange={(colour) => dispatch(updateShirtTextColour(colour))}
+          />
+        </ColourPickerContainer>
 
-      <ColourPicker
-        colour={shirtStyle.colourSecondary}
-        onChange={(colour) => dispatch(updateShirtSecondaryColour(colour))}
-      />
+        <select
+          value={shirtStyle.style}
+          onChange={(e) => dispatch(updateShirtStyle(e.target.value))}
+        >
+          <option value="fmclassic">FM Classic</option>
+          <option value="shirt">Shirt</option>
+        </select>
 
-      <ColourPicker
-        colour={shirtStyle.colourText}
-        onChange={(colour) => dispatch(updateShirtTextColour(colour))}
-      />
+        <PlayerContainer>
+          <Player
+            player={player}
+            onClick={null}
+            shirtStyle={shirtStyle}
+          />
+        </PlayerContainer>
 
-      <select
-        value={squadStyles.pitchStyle}
-        onChange={(e) => dispatch(updatePitchStyle(e.target.value))}
-      >
-        <option value="stripes">Stripes</option>
-        <option value="squares">Squares</option>
-      </select>
+        <select
+          value={squadStyles.pitchStyle}
+          onChange={(e) => dispatch(updatePitchStyle(e.target.value))}
+        >
+          <option value="stripes">Stripes</option>
+          <option value="squares">Squares</option>
+        </select>
+      </Wrapper>
     </>
   );
 };
