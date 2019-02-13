@@ -14,7 +14,7 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   align-items: center;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 `;
 
 const PlayerContainer = styled.div`
@@ -28,7 +28,15 @@ const PlayerContainer = styled.div`
 
 const ColourPickerContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  min-width: 10rem;
+`;
+
+const PitchContainer = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `;
 
 const ShirtOptionsContainer = ({
@@ -66,29 +74,31 @@ const ShirtOptionsContainer = ({
           />
         </ColourPickerContainer>
 
-        <select
-          value={shirtStyle.style}
-          onChange={(e) => dispatch(updateShirtStyle(e.target.value))}
-        >
-          <option value="fmclassic">FM Classic</option>
-          <option value="shirt">Shirt</option>
-        </select>
+        <PitchContainer>
+          <select
+            value={shirtStyle.style}
+            onChange={(e) => dispatch(updateShirtStyle(e.target.value))}
+          >
+            <option value="fmclassic">FM Classic</option>
+            <option value="shirt">Shirt</option>
+          </select>
 
-        <PlayerContainer>
-          <Player
-            player={player}
-            onClick={null}
-            shirtStyle={shirtStyle}
-          />
-        </PlayerContainer>
+          <PlayerContainer>
+            <Player
+              player={player}
+              onClick={null}
+              shirtStyle={shirtStyle}
+            />
+          </PlayerContainer>
 
-        <select
-          value={squadStyles.pitchStyle}
-          onChange={(e) => dispatch(updatePitchStyle(e.target.value))}
-        >
-          <option value="stripes">Stripes</option>
-          <option value="squares">Squares</option>
-        </select>
+          <select
+            value={squadStyles.pitchStyle}
+            onChange={(e) => dispatch(updatePitchStyle(e.target.value))}
+          >
+            <option value="stripes">Stripes</option>
+            <option value="squares">Squares</option>
+          </select>
+        </PitchContainer>
       </Wrapper>
     </>
   );

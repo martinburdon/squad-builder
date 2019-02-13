@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SketchPicker } from 'react-color';
+import { TwitterPicker } from 'react-color';
 import styled from 'styled-components';
 
 const ButtonContainer = styled.div`
@@ -7,6 +7,7 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 1rem;
+  text-align: center;
 `;
 
 const Button = styled.button`
@@ -38,6 +39,13 @@ const PickerContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
+  position: absolute;
+  top: 16rem;
+  left: 3rem;
+`;
+
+const Cover = styled.div`
   position: fixed;
   top: 0;
   right: 0;
@@ -68,11 +76,11 @@ export default class ColourPicker extends Component {
           <ButtonLabel>Pick colour</ButtonLabel>
         </ButtonContainer>
           {this.state.isOpen &&
-            <PickerContainer onClick={ this.togglePicker }>
-              <SketchPicker
-                disableAlpha={true}
-                color={ this.props.colour }
-                onChange={ this.handleChangeComplete }
+            <PickerContainer>
+              <Cover onClick={this.togglePicker} />
+              <TwitterPicker
+                color={this.props.colour}
+                onChange={this.handleChangeComplete}
               />
             </PickerContainer>
           }
