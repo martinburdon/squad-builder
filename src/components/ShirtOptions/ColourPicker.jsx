@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { TwitterPicker } from 'react-color';
 import styled from 'styled-components';
 
+const ColourPickerContainer = styled.div`
+  position: relative;
+`;
+
 const ButtonContainer = styled.div`
   align-items: center;
   display: flex;
@@ -41,7 +45,7 @@ const PickerContainer = styled.div`
   justify-content: center;
   z-index: 10;
   position: absolute;
-  top: 16rem;
+  top: 5rem;
   left: 3rem;
 `;
 
@@ -68,7 +72,7 @@ export default class ColourPicker extends Component {
 
   render() {
     return (
-      <>
+      <ColourPickerContainer>
         <ButtonContainer>
           <Button onClick={this.togglePicker} colour={this.props.colour}>
             <ButtonText>Pick colour</ButtonText>
@@ -84,7 +88,7 @@ export default class ColourPicker extends Component {
               />
             </PickerContainer>
           }
-      </>
+      </ColourPickerContainer>
     );
   }
 };

@@ -11,9 +11,9 @@ const initialState = {
     style: 'fmclassic',
     colourPrimary: '#f00',
     colourSecondary: '#fff',
-    colourText: '#000',
+    colourText: '#fff',
   },
-  pitchStyle: 'stripes'
+  pitchStyle: 'boxes'
 };
 
 export default function(state = initialState, action) {

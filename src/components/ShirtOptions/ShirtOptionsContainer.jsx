@@ -96,7 +96,7 @@ const ShirtOptionsContainer = ({
             onChange={(e) => dispatch(updatePitchStyle(e.target.value))}
           >
             <option value="stripes">Stripes</option>
-            <option value="squares">Squares</option>
+            <option value="boxes">Boxes</option>
           </select>
         </PitchContainer>
       </Wrapper>

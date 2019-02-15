@@ -17,7 +17,7 @@ const initialState = {
     {
       arrow: false,
       captain: false,
-      name: '',
+      name: 'Edit',
       positionId: 2,
       shirtNumber: 2,
       positions: { x: 0, y: 0 }
@@ -25,7 +25,7 @@ const initialState = {
     {
       arrow: false,
       captain: false,
-      name: '',
+      name: 'Edit',
       positionId: 3,
       shirtNumber: 3,
       positions: { x: 0, y: 0 }
@@ -33,7 +33,7 @@ const initialState = {
     {
       arrow: false,
       captain: false,
-      name: '',
+      name: 'Edit',
       positionId: 4,
       shirtNumber: 4,
       positions: { x: 0, y: 0 }
@@ -41,7 +41,7 @@ const initialState = {
     {
       arrow: false,
       captain: false,
-      name: '',
+      name: 'Edit',
       positionId: 5,
       shirtNumber: 5,
       positions: { x: 0, y: 0 }
@@ -49,7 +49,7 @@ const initialState = {
     {
       arrow: false,
       captain: false,
-      name: '',
+      name: 'Edit',
       positionId: 6,
       shirtNumber: 6,
       positions: { x: 0, y: 0 }
@@ -57,7 +57,7 @@ const initialState = {
     {
       arrow: false,
       captain: false,
-      name: '',
+      name: 'Edit',
       positionId: 7,
       shirtNumber: 7,
       positions: { x: 0, y: 0 }
@@ -65,7 +65,7 @@ const initialState = {
     {
       arrow: false,
       captain: false,
-      name: '',
+      name: 'Edit',
       positionId: 8,
       shirtNumber: 8,
       positions: { x: 0, y: 0 }
@@ -73,7 +73,7 @@ const initialState = {
     {
       arrow: false,
       captain: false,
-      name: '',
+      name: 'Edit',
       positionId: 9,
       shirtNumber: 9,
       positions: { x: 0, y: 0 }
@@ -81,7 +81,7 @@ const initialState = {
     {
       arrow: false,
       captain: false,
-      name: '',
+      name: 'Edit',
       positionId: 10,
       shirtNumber: 10,
       positions: { x: 0, y: 0 }
@@ -89,7 +89,7 @@ const initialState = {
     {
       arrow: false,
       captain: false,
-      name: '',
+      name: 'Edit',
       positionId: 11,
       shirtNumber: 11,
       positions: { x: 0, y: 0 }
