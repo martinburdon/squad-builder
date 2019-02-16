@@ -7,12 +7,12 @@ const BasePlayer = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  transform: ${props => `translate(${props.x}rem, ${props.y}rem)`};
   z-index: 2;
 
   .shirt {
     align-items: center;
     color: ${props => `${props.shirtStyle.colourText}`};
+    cursor: grab;
     display: flex;
     justify-content: center;
     text-shadow: 0 0 0.2rem #000;
@@ -20,8 +20,10 @@ const BasePlayer = styled.div`
 
   .name {
     color: white;
+    cursor: pointer;
     font-size: 1.3rem;
     font-weight: bold;
+    margin-top: 0.3rem;
     text-shadow: 0 0 0.2rem #000;
   }
 `;
@@ -60,15 +62,16 @@ export default ({ player, onClick, onStop, shirtStyle }) => {
   return (
     <Draggable
       bounds="parent"
-      position={{x: x * 10, y: y * 10}}
+      handle=".shirt"
+      position={{x, y}}
       onStop={(e, data) => onStop(data)}
     >
-      <ShirtComponent x={x} y={y} onClick={onClick} shirtStyle={shirtStyle}>
+      <ShirtComponent shirtStyle={shirtStyle}>
         <div className="shirt">
           {/*{player.captain ? <i>C</i> : null}*/}
           <span>{player.shirtNumber}</span>
         </div>
-        <span className="name">{player.name}</span>
+        <span className="name" onClick={onClick}>{player.name}</span>
       </ShirtComponent>
     </Draggable>
   )

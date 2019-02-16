@@ -67,7 +67,7 @@ export function updatePositionCoords(positionId, coords) {
   return {
     type: UPDATE_POSITION_COORDS,
     positionId,
-    coords: { x: coords.x / 10, y: coords.y / 10 }
+    coords: { x: coords.x, y: coords.y }
   }
 }
 
