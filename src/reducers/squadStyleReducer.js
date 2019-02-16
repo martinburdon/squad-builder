@@ -9,11 +9,11 @@ import {
 const initialState = {
   shirtStyle: {
     style: 'fmclassic',
-    colourPrimary: 'red',
-    colourSecondary: 'white',
-    colourText: 'black',
+    colourPrimary: '#f00',
+    colourSecondary: '#fff',
+    colourText: '#fff',
   },
-  pitchStyle: 'stripes'
+  pitchStyle: 'boxes'
 };
 
 export default function(state = initialState, action) {

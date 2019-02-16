@@ -14,7 +14,7 @@ const SquadSettingsContainer = ({
   return (
     <section>
       <select
-        value={squadInfo.formation}
+        value={squadInfo.formation.value}
         onChange={(e) => dispatch(updateSquadFormation(e.target.value))}
       >
         {formations.map((item, x) => <option value={item.value} key={x}>{item.display}</option>)}
