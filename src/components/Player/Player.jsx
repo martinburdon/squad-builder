@@ -1,4 +1,5 @@
 import React from 'react';
+import Draggable from 'react-draggable';
 import styled from 'styled-components';
 
 const BasePlayer = styled.div`
@@ -48,20 +49,27 @@ const FMClassic = styled(BasePlayer)`
   }
 `;
 
-export default ({ player, onClick, shirtStyle }) => {
+export default ({ player, onClick, onStop, shirtStyle }) => {
   const shirtStyles = {
     fmclassic: FMClassic
   };
 
   const ShirtComponent = shirtStyles[shirtStyle.style] || Default;
   const { x, y } = player.positions;
+
   return (
-    <ShirtComponent x={x} y={y} onClick={onClick} shirtStyle={shirtStyle}>
-      <div className="shirt">
-        {/*{player.captain ? <i>C</i> : null}*/}
-        <span>{player.shirtNumber}</span>
-      </div>
-      <span className="name">{player.name}</span>
-    </ShirtComponent>
+    <Draggable
+      bounds="parent"
+      position={{x: x * 10, y: y * 10}}
+      onStop={(e, data) => onStop(data)}
+    >
+      <ShirtComponent x={x} y={y} onClick={onClick} shirtStyle={shirtStyle}>
+        <div className="shirt">
+          {/*{player.captain ? <i>C</i> : null}*/}
+          <span>{player.shirtNumber}</span>
+        </div>
+        <span className="name">{player.name}</span>
+      </ShirtComponent>
+    </Draggable>
   )
 };

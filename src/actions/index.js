@@ -45,6 +45,7 @@ export function toggleModal() {
 
 export const UPDATE_PLAYER_NAME = 'UPDATE_PLAYER_NAME';
 export const UPDATE_SHIRT_NUMBER = 'UPDATE_SHIRT_NUMBER';
+export const UPDATE_POSITION_COORDS = 'UPDATE_POSITION_COORDS';
 
 export function updatePlayerName(positionId, name) {
   return {
@@ -59,6 +60,14 @@ export function updateShirtNumber(positionId, shirtNumber) {
     type: UPDATE_SHIRT_NUMBER,
     positionId,
     shirtNumber
+  }
+}
+
+export function updatePositionCoords(positionId, coords) {
+  return {
+    type: UPDATE_POSITION_COORDS,
+    positionId,
+    coords: { x: coords.x / 10, y: coords.y / 10 }
   }
 }
 
