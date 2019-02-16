@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updatePlayerName } from '../../actions/index.js';
+import {
+  updatePlayerName,
+  updateShirtNumber
+} from '../../actions/index.js';
 
 const PlayerOptionsContainer = (props) => {
   const player = props.players.find(player => player.positionId === props.positionId);
@@ -13,6 +16,11 @@ const PlayerOptionsContainer = (props) => {
         value={player.name}
         onChange={(e) => props.dispatchUpdatePlayerName(props.positionId, e.target.value)}
       />
+      <input
+        type="tel"
+        value={player.shirtNumber}
+        onChange={(e) => props.dispatchUpdateShirtNumber(props.positionId, e.target.value)}
+      />
     </>
   );
 };
@@ -22,7 +30,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatchUpdatePlayerName: (playerId, name) => dispatch(updatePlayerName(playerId, name))
+  dispatchUpdatePlayerName: (playerId, name) => dispatch(updatePlayerName(playerId, name)),
+  dispatchUpdateShirtNumber: (playerId, shirtNumber) => dispatch(updateShirtNumber(playerId, shirtNumber))
 });
 
 export default connect(

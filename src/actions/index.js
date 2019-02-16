@@ -44,12 +44,21 @@ export function toggleModal() {
  */
 
 export const UPDATE_PLAYER_NAME = 'UPDATE_PLAYER_NAME';
+export const UPDATE_SHIRT_NUMBER = 'UPDATE_SHIRT_NUMBER';
 
 export function updatePlayerName(positionId, name) {
   return {
     type: UPDATE_PLAYER_NAME,
     positionId,
     name
+  }
+}
+
+export function updateShirtNumber(positionId, shirtNumber) {
+  return {
+    type: UPDATE_SHIRT_NUMBER,
+    positionId,
+    shirtNumber
   }
 }
 
