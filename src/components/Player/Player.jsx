@@ -1,4 +1,5 @@
 import React from 'react';
+import Draggable from 'react-draggable';
 import styled from 'styled-components';
 
 const BasePlayer = styled.div`
@@ -6,12 +7,12 @@ const BasePlayer = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  transform: ${props => `translate(${props.x}rem, ${props.y}rem)`};
   z-index: 2;
 
   .shirt {
     align-items: center;
     color: ${props => `${props.shirtStyle.colourText}`};
+    cursor: grab;
     display: flex;
     justify-content: center;
     text-shadow: 0 0 0.2rem #000;
@@ -19,8 +20,10 @@ const BasePlayer = styled.div`
 
   .name {
     color: white;
+    cursor: pointer;
     font-size: 1.3rem;
     font-weight: bold;
+    margin-top: 0.3rem;
     text-shadow: 0 0 0.2rem #000;
   }
 `;
@@ -48,20 +51,28 @@ const FMClassic = styled(BasePlayer)`
   }
 `;
 
-export default ({ player, onClick, shirtStyle }) => {
+export default ({ player, onClick, onStop, shirtStyle }) => {
   const shirtStyles = {
     fmclassic: FMClassic
   };
 
   const ShirtComponent = shirtStyles[shirtStyle.style] || Default;
   const { x, y } = player.positions;
+
   return (
-    <ShirtComponent x={x} y={y} onClick={onClick} shirtStyle={shirtStyle}>
-      <div className="shirt">
-        {/*{player.captain ? <i>C</i> : null}*/}
-        <span>{player.shirtNumber}</span>
-      </div>
-      <span className="name">{player.name}</span>
-    </ShirtComponent>
+    <Draggable
+      bounds="parent"
+      handle=".shirt"
+      position={{x, y}}
+      onStop={(e, data) => onStop(data)}
+    >
+      <ShirtComponent shirtStyle={shirtStyle}>
+        <div className="shirt">
+          {/*{player.captain ? <i>C</i> : null}*/}
+          <span>{player.shirtNumber}</span>
+        </div>
+        <span className="name" onClick={onClick}>{player.name}</span>
+      </ShirtComponent>
+    </Draggable>
   )
 };

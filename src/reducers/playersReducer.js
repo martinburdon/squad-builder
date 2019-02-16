@@ -2,7 +2,8 @@ import { formations } from '../formations.js';
 import {
   UPDATE_SQUAD_FORMATION,
   UPDATE_PLAYER_NAME,
-  UPDATE_SHIRT_NUMBER
+  UPDATE_SHIRT_NUMBER,
+  UPDATE_POSITION_COORDS
 } from '../actions/index.js'
 
 const initialState = {
@@ -131,6 +132,18 @@ export default function(state = initialState, action) {
       const players = state.players.map(player => ({
         ...player,
         shirtNumber: player.positionId === action.positionId ? action.shirtNumber : player.shirtNumber
+      }));
+
+      return {
+        ...state,
+        players
+      }
+    }
+
+    case UPDATE_POSITION_COORDS: {
+      const players = state.players.map(player => ({
+        ...player,
+        positions: player.positionId === action.positionId ? action.coords : player.positions
       }));
 
       return {

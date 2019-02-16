@@ -1,7 +1,10 @@
 import React from 'react';
 import Player from './Player.jsx';
 import { connect } from 'react-redux';
-import { setModalComponent } from '../../actions/index.js';
+import {
+  setModalComponent,
+  updatePositionCoords
+} from '../../actions/index.js';
 
 const PlayerContainer = ({ player, shirtStyle, dispatch }) => {
   return (
@@ -14,6 +17,7 @@ const PlayerContainer = ({ player, shirtStyle, dispatch }) => {
           positionId: player.positionId
         }
       }))}
+      onStop={(coords) => dispatch(updatePositionCoords(player.positionId,coords))}
     />
   );
 };
