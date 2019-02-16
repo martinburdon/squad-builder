@@ -25,7 +25,7 @@ const BasePlayer = styled.div`
   }
 `;
 
-const DefaultStyle = styled(BasePlayer)`
+const Default = styled(BasePlayer)`
   background: ${props => `${props.shirtStyle.colourPrimary}`};
   height: 5rem;
   width: 5rem;
@@ -53,7 +53,7 @@ export default ({ player, onClick, shirtStyle }) => {
     fmclassic: FMClassic
   };
 
-  const ShirtComponent = shirtStyles[shirtStyle.style] || DefaultStyle;
+  const ShirtComponent = shirtStyles[shirtStyle.style] || Default;
   const { x, y } = player.positions;
   return (
     <ShirtComponent x={x} y={y} onClick={onClick} shirtStyle={shirtStyle}>
